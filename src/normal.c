@@ -2088,7 +2088,7 @@ nv_gd(
     }
 
 #ifdef FEAT_FOLDING
-    if ((fdo_flags & FDO_SEARCH) && KeyTyped && oap->op_type == OP_NOP)
+    if ((fdo_flags & FDO_SEARCH) && KeyTyped && oap->op_type == OP_NOP) // here?
 	foldOpenCursor();
 #endif
     // clear any search statistics
@@ -4214,6 +4214,7 @@ normal_search(
     curwin->w_set_curswant = TRUE;
 
     CLEAR_FIELD(sia);
+    // issue is do_search() returns 0 (aka failure)
     i = do_search(cap->oap, dir, dir, pat, cap->count1,
 			    opt | SEARCH_OPT | SEARCH_ECHO | SEARCH_MSG, &sia);
     if (wrapped != NULL)
@@ -4226,7 +4227,7 @@ normal_search(
 	    cap->oap->motion_type = MLINE;
 	curwin->w_cursor.coladd = 0;
 #ifdef FEAT_FOLDING
-	if (cap->oap->op_type == OP_NOP && (fdo_flags & FDO_SEARCH) && KeyTyped)
+	if (cap->oap->op_type == OP_NOP && (fdo_flags & FDO_SEARCH) && KeyTyped) // here?
 	    foldOpenCursor();
 #endif
     }
@@ -4580,7 +4581,7 @@ nv_brackets(cmdarg_T *cap)
 	    else
 		curwin->w_set_curswant = TRUE;
 # ifdef FEAT_FOLDING
-	if (cap->oap->op_type == OP_NOP && (fdo_flags & FDO_SEARCH) && KeyTyped)
+	if (cap->oap->op_type == OP_NOP && (fdo_flags & FDO_SEARCH) && KeyTyped) // here?
 	    foldOpenCursor();
 # endif
     }

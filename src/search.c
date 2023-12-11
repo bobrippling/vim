@@ -1630,7 +1630,7 @@ do_search(
 				show_top_bot_msg, msgbuf,
 				(count != 1 || has_offset
 #ifdef FEAT_FOLDING
-				 || (!(fdo_flags & FDO_SEARCH)
+				 || (!(fdo_flags & FDO_SEARCH) // here?
 				     && hasFolding(curwin->w_cursor.lnum,
 								   NULL, NULL))
 #endif
@@ -3068,7 +3068,7 @@ current_search(
     }
 
 #ifdef FEAT_FOLDING
-    if (fdo_flags & FDO_SEARCH && KeyTyped)
+    if (fdo_flags & FDO_SEARCH && KeyTyped) // here?
 	foldOpenCursor();
 #endif
 
